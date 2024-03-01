@@ -22,6 +22,7 @@ jobs:
           - container_name: marpit
             from_image: mcr.microsoft.com/devcontainers/base
             from_variant: debian
+            platform: linux/amd64
           - container_name: my_avd
             from_image: ghcr.io/aristanetworks/avd/dev
             from_variant: python3.11
