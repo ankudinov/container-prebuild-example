@@ -32,3 +32,7 @@ jobs:
           echo "My repository: ${{ github.repository }}"
           echo "My branch: ${{ github.ref_name }}"
           echo "My Github username: ${{ github.actor }}"
+
+      - name: echo secret
+        run: |
+          echo "${{ secrets.TEST_SECRET }}"
