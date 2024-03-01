@@ -1,3 +1,9 @@
 {
-    "image": "ghcr.io/ankudinov/container-prebuild-example/carbon:latest"
+    // "image": "ghcr.io/ankudinov/container-prebuild-example/carbon:latest"
+    // "image": "ghcr.io/ankudinov/container-prebuild-example/golang-jupyter:latest"
+    "image": "ghcr.io/ankudinov/container-prebuild-example/my_avd:latest",
+    "containerEnv": {
+        "ARISTA_TOKEN": "${localEnv:ARTOKEN}"
+    },
+    "onCreateCommand": "ardl get eos --image-type cEOS --latest --import-docker"
 }
