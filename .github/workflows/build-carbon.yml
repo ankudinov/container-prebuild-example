@@ -1,6 +1,9 @@
 ---
 name: pre-build my 1st carbon now container
 
+env:
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
 on:
   push:
     branches: [master]
