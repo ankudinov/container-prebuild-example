@@ -1,0 +1,41 @@
+---
+name: build multiple containers at once
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/child-workflow.yml
+      - .github/workflows/parent-workflow.yml
+      - containers/**
+
+jobs:
+  build_some_containers:
+    uses: ./.github/workflows/child-workflow.yml
+    strategy:
+      matrix:
+        container_name: [golang-jupyter, my_avd, marpit]
+        include:
+          - container_name: golang-jupyter
+            from_image: janpfeifer/gonb_jupyterlab
+            from_variant: latest
+          - container_name: marpit
+            from_image: mcr.microsoft.com/devcontainers/base
+            from_variant: debian
+          - container_name: my_avd
+            from_image: ghcr.io/aristanetworks/avd/dev
+            from_variant: python3.11
+            username: avd
+            clab_version: "0.51.3"
+            avd_github_repo: aristanetworks/avd
+            avd_branch_name: devel
+
+    with:
+      container_name: ${{ matrix.container_name }}
+      from_image: ${{ matrix.from_image }}
+      from_variant: ${{ matrix.from_variant }}
+      username: ${{ matrix.username }}
+      clab_version: ${{ matrix.clab_version }}
+      avd_github_repo: ${{ matrix.avd_github_repo }}
+      avd_branch_name: ${{ matrix.avd_branch_name }}
+      platform: ${{ matrix.platform }}
